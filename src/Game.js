@@ -1,5 +1,6 @@
 import React from 'react'
 import { constants } from './constants'
+import Board from './components/Board'
 
 const gameStyle = {
   textAlign: 'center',
@@ -12,6 +13,7 @@ const gameStyle = {
 const Game = () => (
   <div style={gameStyle} >
     <h2>{constants.GAME_TITLE}</h2>
+    <Board />
   </div>
 )
 
