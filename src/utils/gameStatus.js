@@ -14,5 +14,8 @@ export const isWon = squares => {
   if (squares[1] && squares[1] === squares[4] && squares[1] === squares[7]) {
     return true
   }
+  if (squares[2] && squares[2] === squares[5] && squares[2] === squares[8]) {
+    return true
+  }
   return false
 }
