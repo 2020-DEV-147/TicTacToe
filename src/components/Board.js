@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Square from './Square'
 import { constants } from '../constants'
+import { isWon } from '../utils/gameStatus'
 
 const boardStyle = {
   border: '4px solid',
@@ -15,21 +16,26 @@ const Board = () => {
   const emptyBoard = Array(constants.TOTAL_SQUARES).fill(null);
   const [squares, setSquares] = useState(emptyBoard)
   const [activePlayer, setActivePlayer] = useState(constants.PLAYER_X)
+  const [winner, setWinner] = useState(null)
   
   const registerMove = (position) => {
     const filledSquares = [...squares]
     filledSquares[position] = activePlayer    
     setSquares(filledSquares)
+
+    if (isWon(filledSquares)) setWinner(activePlayer)
   }
 
   const getGameStatus = () => {
+    if (winner) return `${winner} ${constants.GAME_WIN}`
+
     return `${constants.CURRENT_PLAYER}: ${activePlayer}`
   }
 
   const isFilledSquare = (squares, position) => !!squares[position]
 
   const handleMove = position => {
-    if (isFilledSquare(squares, position)) return
+    if (winner || isFilledSquare(squares, position)) return
 
     registerMove(position)
 

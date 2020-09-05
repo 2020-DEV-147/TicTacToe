@@ -20,6 +20,20 @@ const playerO = {
   }
 }
 
+const simulateMove = (wrapper, positions) => {
+  for (let position=0;position<positions.length;position++) {
+    if (position % 2) {
+      playerO.move(positions[position], wrapper)
+    }
+    else {
+      playerX.move(positions[position], wrapper)
+    }
+  }  
+}
+
+const PLAYER_X_WIN = `${constants.PLAYER_X} ${constants.GAME_WIN}`
+const PLAYER_O_WIN = `${constants.PLAYER_O} ${constants.GAME_WIN}`
+
 describe('Board Component', ()=> {
   const wrapper = getWrapper()
 
@@ -49,5 +63,17 @@ describe('Board Component', ()=> {
     expect(wrapper.find(Square).at(0).prop('move')).toEqual(constants.PLAYER_X)
     playerX.move(0, wrapper)
     expect(wrapper.find(Square).at(0).prop('move')).toEqual(constants.PLAYER_X)
+  })
+
+  it('Should display status as "X win" if player X fill three squares in first row', () => {
+    const wrapper = getWrapper()
+    simulateMove(wrapper, [0, 4, 1, 5, 2])
+    expect(wrapper.find('div').at(0).text()).toEqual(PLAYER_X_WIN)
+  })
+
+  it('Should display status as "O win" if player O fill three squares in first row', () => {
+    const wrapper = getWrapper()
+    simulateMove(wrapper, [3, 0, 4, 1, 6, 2])
+    expect(wrapper.find('div').at(0).text()).toEqual(PLAYER_O_WIN)
   })
 })

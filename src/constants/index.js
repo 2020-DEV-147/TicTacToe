@@ -1,5 +1,6 @@
 export const constants = {
   GAME_TITLE: 'Tic Tac Toe',
+  GAME_WIN: 'win',
   CURRENT_PLAYER: 'Current Player',
   TOTAL_SQUARES: 9,
   PLAYER_X: 'X',
