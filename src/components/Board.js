@@ -12,10 +12,17 @@ const boardStyle = {
   gridTemplate: 'repeat(3, 1fr)/repeat(3, 1fr)'
 }
 
+const restartButtonStyle = {
+  border: '2px solid',
+  fontSize:'20px',
+  fontWeight: '800',
+}
+
 const Board = () => {
   const emptyBoard = Array(constants.TOTAL_SQUARES).fill(null);
+  const firstPlayer = constants.PLAYER_X
   const [squares, setSquares] = useState(emptyBoard)
-  const [activePlayer, setActivePlayer] = useState(constants.PLAYER_X)
+  const [activePlayer, setActivePlayer] = useState(firstPlayer)
   const [winner, setWinner] = useState(null)
   
   const registerMove = (position) => {
@@ -44,6 +51,12 @@ const Board = () => {
     setActivePlayer(prevActivePlayer => prevActivePlayer === constants.PLAYER_X ? constants.PLAYER_O : constants.PLAYER_X)
   }
 
+  const resetBoard = () => {
+    setSquares(emptyBoard)
+    setActivePlayer(firstPlayer)
+    setWinner(null)
+  }
+
   return (
     <>
       <div>{getGameStatus()}</div>
@@ -52,6 +65,7 @@ const Board = () => {
           <Square key={position} move={square} onMove={() => handleMove(position)} />
         ))}
       </div>
+      <button style={restartButtonStyle} onClick={resetBoard}>{constants.GAME_RESTART}</button>
     </>
   )
 }

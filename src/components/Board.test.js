@@ -33,6 +33,7 @@ const simulateMove = (wrapper, positions) => {
 
 const PLAYER_X_WIN = `${constants.PLAYER_X} ${constants.GAME_WIN}`
 const PLAYER_O_WIN = `${constants.PLAYER_O} ${constants.GAME_WIN}`
+const INITIAL_STATUS = `${constants.CURRENT_PLAYER}: ${constants.PLAYER_X}`
 
 describe('Board Component', ()=> {
   const wrapper = getWrapper()
@@ -46,7 +47,7 @@ describe('Board Component', ()=> {
   })
 
   it('Should display status as Current Player: X', () => {
-    expect(wrapper.find('div').at(0).text()).toEqual(`${constants.CURRENT_PLAYER}: ${constants.PLAYER_X}`)
+    expect(wrapper.find('div').at(0).text()).toEqual(INITIAL_STATUS)
   })
 
   it('Should render player move in sqaure if user click on it', () => {
@@ -165,5 +166,11 @@ describe('Board Component', ()=> {
     const wrapper = getWrapper()
     simulateMove(wrapper, [0, 2, 1, 3, 5, 4, 6, 7, 8])
     expect(wrapper.find('div').at(0).text()).toEqual(constants.GAME_DRAW)
+  })
+
+  it('Should display status as "Current Player: X" If restart game button is clicked', () => {
+    const wrapper = getWrapper()
+    wrapper.find('button').simulate('click')
+    expect(wrapper.find('div').at(0).text()).toEqual(INITIAL_STATUS)
   })
 })
