@@ -14,6 +14,12 @@ const playerX = {
   }
 }
 
+const playerO = {
+  move: (position, wrapper) => {
+    wrapper.find(Square).at(position).simulate('move')
+  }
+}
+
 describe('Board Component', ()=> {
   const wrapper = getWrapper()
 
@@ -33,6 +39,8 @@ describe('Board Component', ()=> {
     const wrapper = getWrapper()
     playerX.move(0, wrapper)
     expect(wrapper.find(Square).at(0).prop('move')).toEqual(constants.PLAYER_X)
+    playerO.move(1, wrapper)
+    expect(wrapper.find(Square).at(1).prop('move')).toEqual(constants.PLAYER_O)
   })
 
   it('Should render same move if player click twice on the same square', () => {
