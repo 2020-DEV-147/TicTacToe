@@ -148,4 +148,16 @@ describe('Board Component', ()=> {
     simulateMove(wrapper, [1, 0, 2, 4, 5, 8])
     expect(wrapper.find('div').at(0).text()).toEqual(PLAYER_O_WIN)
   })
+
+  it('Should display status as "X win" if player X fill three squares in second diagonal (top-right to bottom-left)', () => {
+    const wrapper = getWrapper()
+    simulateMove(wrapper, [2, 5, 4, 7, 6])
+    expect(wrapper.find('div').at(0).text()).toEqual(PLAYER_X_WIN)
+  })
+
+  it('Should display status as "O win" if player O fill three squares in second diagonal (top-right to bottom-left)', () => {
+    const wrapper = getWrapper()
+    simulateMove(wrapper, [1, 2, 0, 4, 3, 6])
+    expect(wrapper.find('div').at(0).text()).toEqual(PLAYER_O_WIN)
+  })
 })
