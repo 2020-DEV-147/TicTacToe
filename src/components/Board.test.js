@@ -160,4 +160,10 @@ describe('Board Component', ()=> {
     simulateMove(wrapper, [1, 2, 0, 4, 3, 6])
     expect(wrapper.find('div').at(0).text()).toEqual(PLAYER_O_WIN)
   })
+
+  it('Should display status as "Game Draw" If all nine squares are filled and neither player has three in a row', () => {
+    const wrapper = getWrapper()
+    simulateMove(wrapper, [0, 2, 1, 3, 5, 4, 6, 7, 8])
+    expect(wrapper.find('div').at(0).text()).toEqual(constants.GAME_DRAW)
+  })
 })

@@ -1,3 +1,5 @@
+import { constants } from '../constants'
+
 export const isWon = squares => {
   const winCombinations = [
     [0, 1, 2],
@@ -21,4 +23,9 @@ export const isWon = squares => {
     }
   }
   return false
+}
+
+export const isDraw = (winner, squares) => {
+  const filledSquaresCount = squares.filter(square => square !== null ).length
+  return !winner && filledSquaresCount === constants.TOTAL_SQUARES
 }

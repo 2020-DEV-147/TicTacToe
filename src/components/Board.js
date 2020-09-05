@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Square from './Square'
 import { constants } from '../constants'
-import { isWon } from '../utils/gameStatus'
+import { isWon, isDraw } from '../utils/gameStatus'
 
 const boardStyle = {
   border: '4px solid',
@@ -28,6 +28,8 @@ const Board = () => {
 
   const getGameStatus = () => {
     if (winner) return `${winner} ${constants.GAME_WIN}`
+
+    if (isDraw(winner, squares)) return constants.GAME_DRAW
 
     return `${constants.CURRENT_PLAYER}: ${activePlayer}`
   }
