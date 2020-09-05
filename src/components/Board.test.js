@@ -34,4 +34,12 @@ describe('Board Component', ()=> {
     playerX.move(0, wrapper)
     expect(wrapper.find(Square).at(0).prop('move')).toEqual(constants.PLAYER_X)
   })
+
+  it('Should render same move if player click twice on the same square', () => {
+    const wrapper = getWrapper()
+    playerX.move(0, wrapper)
+    expect(wrapper.find(Square).at(0).prop('move')).toEqual(constants.PLAYER_X)
+    playerX.move(0, wrapper)
+    expect(wrapper.find(Square).at(0).prop('move')).toEqual(constants.PLAYER_X)
+  })
 })

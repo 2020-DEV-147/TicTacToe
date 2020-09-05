@@ -25,7 +25,11 @@ const Board = () => {
     return `${constants.CURRENT_PLAYER}: ${constants.PLAYER_X}`
   }
 
+  const isFilledSquare = (squares, position) => !!squares[position]
+
   const handleMove = position => {
+    if (isFilledSquare(squares, position)) return
+    
     registerMove(position)
   }
 
